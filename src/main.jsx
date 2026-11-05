@@ -9,6 +9,11 @@ const tz='Asia/Bangkok';
 function bangkokDate(){return new Intl.DateTimeFormat('en-CA',{timeZone:tz,year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date())}
 const displayDate=d=>d?new Date(d+'T12:00:00+07:00').toLocaleDateString('th-TH',{day:'numeric',month:'long',year:'numeric',timeZone:tz}):'';
 function App(){const[page,setPage]=useState('home'),[services,setServices]=useState([]),[service,setService]=useState(''),[day,setDay]=useState(bangkokDate()),[slots,setSlots]=useState([]),[slot,setSlot]=useState(''),[name,setName]=useState(''),[phone,setPhone]=useState(''),[busy,setBusy]=useState(false),[notice,setNotice]=useState(''),[receipt,setReceipt]=useState(''),[session,setSession]=useState(null),[email,setEmail]=useState(''),[password,setPassword]=useState(''),[bookings,setBookings]=useState([]),[filter,setFilter]=useState('all'),[adminAllowed,setAdminAllowed]=useState(false),[editing,setEditing]=useState(false);
+               useEffect(() => {
+  if (window.location.hash === '#admin') {
+    setPage('admin');
+  }
+}, []);
 const tell=(v)=>{setNotice(v);window.scrollTo({top:0,behavior:'smooth'})};
 async function loadServices(){if(!supabase)return;const{data,error}=await supabase.from('services').select('*').order('sort_order');if(error)tell(error.message);else{setServices(data||[]);setService(v=>v||data?.[0]?.id||'')}}
 useEffect(()=>{loadServices();if(supabase){supabase.auth.getSession().then(({data})=>setSession(data.session));const{data}=supabase.auth.onAuthStateChange((_event,s)=>setSession(s));return()=>data.subscription.unsubscribe()}},[]);
