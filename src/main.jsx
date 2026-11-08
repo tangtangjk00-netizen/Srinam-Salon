@@ -113,7 +113,7 @@ return <><header className="top"><div className="header-inner"><button className
 <footer>
   <strong>SRINAM</strong>
   <p>BEAUTY SALON</p>
-  <div>จันทร์ – เสาร์ · 09:00 – 19:00 น.</div>
+  <div>เปิดทุกวัน ยกเว้นวันพุธ · 09:00 – 18:00 น. (รับคิวสุดท้าย 18:00 น.)</div>
 
   <div className="contact-section">
     <h3>ติดต่อเรา</h3>
